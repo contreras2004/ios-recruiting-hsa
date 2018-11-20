@@ -20,7 +20,7 @@ class BaseViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.setUpSearchController()
+        self.setUpSearchController(withDelegate: self)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -28,13 +28,21 @@ class BaseViewController: UIViewController {
         navigationItem.hidesSearchBarWhenScrolling = false
     }
     
-    func setUpSearchController(){
+    func setUpSearchController(withDelegate: BaseViewController){
         self.definesPresentationContext = true
         searchController = UISearchController(searchResultsController: nil)
         searchController.dimsBackgroundDuringPresentation = false
         searchController.definesPresentationContext = true
         self.navigationItem.searchController = searchController
         
+        if let searchController = self.searchController{
+            if let delegate = withDelegate as? UISearchControllerDelegate{
+                searchController.delegate = delegate
+            }
+            if let delegate = withDelegate as? UISearchResultsUpdating{
+                searchController.searchResultsUpdater = delegate
+            }
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {

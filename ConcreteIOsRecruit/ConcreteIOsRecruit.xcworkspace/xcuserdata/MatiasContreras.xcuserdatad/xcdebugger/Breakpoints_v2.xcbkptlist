@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ConcreteIOsRecruit/Views/PopularMoviesViewController.swift"
-            timestampString = "564377737.559298"
+            timestampString = "564379711.15773"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "37"
-            endingLineNumber = "37"
+            startingLineNumber = "36"
+            endingLineNumber = "36"
             landmarkName = "getMovies()"
             landmarkType = "7">
          </BreakpointContent>

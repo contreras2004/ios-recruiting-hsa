@@ -20,8 +20,7 @@ class PopularMoviesViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.getMovies()
-        self.searchController.delegate = self
-        self.searchController.searchResultsUpdater = self
+        self.setUpSearchController(withDelegate: self)
         self.moviesCollectionView.delegate = self
         self.moviesCollectionView.cellReuseId = .MovieCollectionViewCell
     }
@@ -36,10 +35,13 @@ class PopularMoviesViewController: BaseViewController {
             if let error = error{
                 debugPrint("There are no movies to display: \(error)")
                 self.moviesCollectionView.addMessageView(type: .noConnection)
+                self.navigationItem.hidesSearchBarWhenScrolling = true
+                self.navigationItem.searchController = nil
                 return
             }
             if let movies = movies{
                 self.movies = movies
+                self.setUpSearchController(withDelegate: self)
             }
         }
     }

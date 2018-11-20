@@ -26,20 +26,22 @@ class FavoritesViewController: BaseViewController {
     }
     
     func configureView(){
-        self.searchController.delegate = self
-        self.searchController.searchResultsUpdater = self
-        
+        //self.searchController.delegate = self
+        //self.searchController.searchResultsUpdater = self
+        self.setUpSearchController(withDelegate: self)
         favoritesDataManager = FavoritesDataManger() //this triggers the fetch movies from local storage
         moviesCollectionView.movies = favoritesDataManager.favorites.movies
         addEmptyMessage()
     }
     
-    func sd(){
+    func addEmptyMessage(){
         if self.favoritesDataManager.favorites.movies.count == 0{
             self.moviesCollectionView.addMessageView(type: .emptyFavorites)
+            self.navigationItem.searchController = nil
         }
         else{
             self.moviesCollectionView.removeMessageView()
+            self.setUpSearchController(withDelegate: self)
         }
     }
 }
